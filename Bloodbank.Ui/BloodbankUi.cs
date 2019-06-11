@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Bloodbank.Core.Models;
+using Bloodbank.Core.Providers;
 using Bloodbank.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,43 +10,23 @@ namespace Bloodbank.Ui
     public class BloodbankUi
     {
         private readonly ILogger _logger;
+        private readonly IPersonService _personService;
+        private readonly IPersonProvider _personProvider;
 
-        public BloodbankUi(IServiceProvider services)
+        public BloodbankUi(ILogger logger, IPersonService personService, IPersonProvider personProvider)
         {
-            _logger = services.GetRequiredService<ILogger>();
+            _logger = logger;
+            _personService = personService;
+            _personProvider = personProvider;
         }
         public async Task InitializeUi()
         {
             _logger.Log("Working I guess.");
-
+            
 
             await Task.Delay(-1);
         }
 
-        private Person GeneratePerson()
-        {
-            var address = new Address
-            {
-                City = "Sheffield",
-                Country = "Uk",
-                HouseNum = 234,
-                PostCode = "S4 8NT",
-                RoadName = "Something"
-            };
-
-            var person = new Person
-            {
-                Id = 1,
-                Address = address,
-                BloodInfo = new BloodInfo
-                {
-                    BloodType = BloodType.ABNegative
-                },
-                FirstName = "Drax",
-                LastName = "Codes"
-            };
-
-            return person;
-        }
+        
     }
 }
