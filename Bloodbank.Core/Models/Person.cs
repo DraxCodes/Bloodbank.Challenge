@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Sockets;
-using System.Text;
-
-namespace Bloodbank.Core.Models
+﻿namespace Bloodbank.Core.Models
 {
     public class Person
     {
