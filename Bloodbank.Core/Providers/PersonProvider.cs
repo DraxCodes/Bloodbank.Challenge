@@ -13,19 +13,11 @@ namespace Bloodbank.Core.Providers
         {
             _db = db;
         }
-
-
-        public Person GetPersonById(int id)
-            => _db.RestoreSingle<Person>(x => x.Id == id);
-
+        
         public Person GetPerson(Expression<Func<Person, bool>> predicate)
             => _db.RestoreSingle(predicate);
 
             public IEnumerable<Person> GetPeople<T>(Expression<Func<Person, bool>> predicate)
             => _db.RestoreMany(predicate);
-
-        //Maybe Add store.... 
-        //NEED TO DISCORDTHINK
-        //LETS WORK REVERSE
     }
 }
