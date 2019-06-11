@@ -5,7 +5,7 @@ namespace Bloodbank.Core.Services
 {
     public interface IPersonService
     {
-        void RegisterPerson(Person person);
+        void RegisterPerson(Person person = null);
         void RegisterPeople(IEnumerable<Person> people);
     }
 }
