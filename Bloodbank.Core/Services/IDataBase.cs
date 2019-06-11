@@ -11,5 +11,6 @@ namespace Bloodbank.Core.Services
         T RestoreSingle<T>(Expression<Func<T, bool>> predicate);
         IEnumerable<T> RestoreMany<T>(Expression<Func<T, bool>> predicate);
         bool Exists<T>(Expression<Func<T, bool>> predicate);
+        int Count<T>();
     }
 }

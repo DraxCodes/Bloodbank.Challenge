@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Bloodbank.Core.Models;
+using Bloodbank.Core.Providers;
 using Bloodbank.Core.SystemAbstractions;
+using Console = System.Console;
 
 namespace Bloodbank.Core.Services
 {
@@ -10,12 +12,14 @@ namespace Bloodbank.Core.Services
         private readonly IDataBase _db;
         private readonly IConsole _console;
         private readonly ILogger _logger;
+        private readonly IPersonProvider _personProvider;
 
-        public PersonService(IDataBase db, IConsole console, ILogger logger)
+        public PersonService(IDataBase db, IConsole console, ILogger logger, IPersonProvider personProvider)
         {
             _db = db;
             _console = console;
             _logger = logger;
+            _personProvider = personProvider;
         }
 
         //TODO: Refactor.
@@ -49,6 +53,40 @@ namespace Bloodbank.Core.Services
         {
             foreach (var person in people)
                 RegisterPerson(person);
+        }
+
+        public void DisplayPersonInformation()
+        {
+            //TODO: Move try/catch
+            try
+            {
+                _logger.Write("Enter first name.");
+                var firstName = _console.ReadLine().ToLower();
+
+                _logger.Write("Enter last name.");
+                var lastName = _console.ReadLine().ToLower();
+
+                //Todo: ignore case better.
+
+                var person = _personProvider.GetPerson(x =>
+                    x.FirstName.ToLower() == firstName &&
+                    x.LastName.ToLower() == lastName);
+
+                _logger.Write($"\nName: {person.FirstName} {person.LastName}\n" +
+                                   $"Blood-type: {person.BloodInfo.BloodType}\n" +
+                                   $"Is Universal Blood Donor: {person.BloodInfo.IsUniversalRedCellDonor}\n" +
+                                   $"Is Universal Plasma Donor: {person.BloodInfo.IsUniversalPlasmaDonor}\n");
+            }
+            catch (Exception)
+            {
+               _logger.Log("Sorry, Person note found.");
+            }
+        }
+
+        public void DisplayEntries()
+        {
+            var entries = _db.Count<Person>();
+            _logger.Write($"Current Entries: {entries}\n");
         }
 
         private BloodType GetBloodType()

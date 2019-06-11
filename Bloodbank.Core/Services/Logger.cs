@@ -12,8 +12,8 @@ namespace Bloodbank.Core.Services
         }
 
         private readonly Color _baseColor = Color.Cyan;
-
-        public void Log(string message) => Write($"Log: {message}");
+        private readonly  Color _logColor = Color.Firebrick;
+        public void Log(string message) => _console.WriteLine($"Log: {message}", _logColor);
 
         public void Write(string message) => _console.WriteLine(message, _baseColor);
     }

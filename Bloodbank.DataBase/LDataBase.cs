@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Claims;
+using Bloodbank.Core.Models;
 using Bloodbank.Core.Services;
 using LiteDB;
 
@@ -35,6 +37,15 @@ namespace Bloodbank.DataBase
             {
                 var collection = db.GetCollection<T>();
                 return collection.Exists(predicate);
+            }
+        }
+
+        public int Count<T>()
+        {
+            using (var db = new LiteDatabase(DbLocation))
+            {
+                var collection = db.GetCollection<Person>();
+                return collection.Count();
             }
         }
 
