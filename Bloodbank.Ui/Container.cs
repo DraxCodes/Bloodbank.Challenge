@@ -14,6 +14,7 @@ namespace Bloodbank.Ui
                 .AddSingleton<IPersonService, PersonService>()
                 .AddSingleton<IPersonProvider, PersonProvider>()
                 .AddSingleton<ILogger, Logger>()
+                .AddSingleton<BloodbankUi>()
                 .BuildServiceProvider();
     }
 }
