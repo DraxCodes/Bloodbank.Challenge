@@ -1,4 +1,5 @@
 ﻿using System;
+using Bloodbank.Core;
 using Bloodbank.Core.Providers;
 using Bloodbank.Core.Services;
 using Bloodbank.DataBase;
@@ -11,10 +12,8 @@ namespace Bloodbank.Ui
         public static IServiceProvider SetupServiceProvider()
             => new ServiceCollection()
                 .AddTransient<IDataBase, LDataBase>()
-                .AddSingleton<IPersonService, PersonService>()
-                .AddSingleton<IPersonProvider, PersonProvider>()
-                .AddSingleton<ILogger, Logger>()
                 .AddSingleton<BloodbankUi>()
+                .UseBloodbankCore()
                 .BuildServiceProvider();
     }
 }
