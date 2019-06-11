@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using Bloodbank.Core.Models;
+﻿using System.Threading.Tasks;
 using Bloodbank.Core.Providers;
 using Bloodbank.Core.Services;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Bloodbank.Ui
 {
@@ -22,7 +19,7 @@ namespace Bloodbank.Ui
         public async Task InitializeUi()
         {
             _logger.Log("Working I guess.");
-            
+            _personService.RegisterPerson();
 
             await Task.Delay(-1);
         }
