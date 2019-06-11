@@ -7,5 +7,7 @@ namespace Bloodbank.Core.Services
     {
         void RegisterPerson(Person person = null);
         void RegisterPeople(IEnumerable<Person> people);
+        void DisplayPersonInformation();
+        void DisplayEntries();
     }
 }
