@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Bloodbank.Ui
 {
     class Program
     {
-        static void Main(string[] args)
+        
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var services = Container.SetupServiceProvider();
+            await services.GetRequiredService<BloodbankUi>().InitializeUi();
         }
     }
 }
