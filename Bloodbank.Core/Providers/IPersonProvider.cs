@@ -7,7 +7,8 @@ namespace Bloodbank.Core.Providers
 {
     public interface IPersonProvider
     {
-        Person GetPerson(int id);
+        Person GetPersonById(int id);
+        Person GetPerson(Expression<Func<Person, bool>> predicate);
         IEnumerable<Person> GetPeople<T>(Expression<Func<Person, bool>> predicate);
     }
 }

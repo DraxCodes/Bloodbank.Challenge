@@ -15,10 +15,13 @@ namespace Bloodbank.Core.Providers
         }
 
 
-        public Person GetPerson(int id)
+        public Person GetPersonById(int id)
             => _db.RestoreSingle<Person>(x => x.Id == id);
 
-        public IEnumerable<Person> GetPeople<T>(Expression<Func<Person, bool>> predicate)
+        public Person GetPerson(Expression<Func<Person, bool>> predicate)
+            => _db.RestoreSingle(predicate);
+
+            public IEnumerable<Person> GetPeople<T>(Expression<Func<Person, bool>> predicate)
             => _db.RestoreMany(predicate);
 
         //Maybe Add store.... 
