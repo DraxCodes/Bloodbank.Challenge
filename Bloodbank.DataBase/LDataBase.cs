@@ -44,7 +44,7 @@ namespace Bloodbank.DataBase
         {
             using (var db = new LiteDatabase(DbLocation))
             {
-                var collection = db.GetCollection<Person>();
+                var collection = db.GetCollection<T>();
                 return collection.Count();
             }
         }
